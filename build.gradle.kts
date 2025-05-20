@@ -1,0 +1,6 @@
+plugins {
+   base
+}
+
+group = "io.github.morapowered"
+version = "1.0-SNAPSHOT"
