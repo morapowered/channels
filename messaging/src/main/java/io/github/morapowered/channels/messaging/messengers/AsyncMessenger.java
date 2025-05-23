@@ -1,0 +1,60 @@
+package io.github.morapowered.channels.messaging.messengers;
+
+import io.github.morapowered.channels.messaging.Message;
+import io.github.morapowered.channels.messaging.ReceivedMessage;
+import io.github.morapowered.channels.messaging.codec.MessageCodec;
+import io.github.morapowered.channels.messaging.handler.MessagingHandler;
+import io.github.morapowered.channels.messaging.subscription.AllTypeListener;
+import io.github.morapowered.channels.messaging.subscription.Subscription;
+import io.github.morapowered.channels.messaging.subscription.TypedListener;
+import io.lettuce.core.RedisClient;
+import io.lettuce.core.RedisFuture;
+import io.lettuce.core.pubsub.StatefulRedisPubSubConnection;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
+
+public class AsyncMessenger extends AbstractMessenger {
+
+    public AsyncMessenger(@NotNull StatefulRedisPubSubConnection<String, Message> connection, @Nullable MessagingHandler handler) {
+        super(connection, handler);
+    }
+
+    public AsyncMessenger(RedisClient client, MessageCodec codec, @Nullable MessagingHandler handler) {
+        super(client, codec, handler);
+    }
+
+    public AsyncMessenger(RedisClient client, MessageCodec codec) {
+        super(client, codec);
+    }
+
+    public AsyncMessenger(RedisClient client, @Nullable MessagingHandler handler) {
+        super(client, handler);
+    }
+
+    public AsyncMessenger(RedisClient client) {
+        super(client);
+    }
+
+    public CompletableFuture<Subscription> subscribe(Consumer<ReceivedMessage<Message>> listener, String channel) {
+        AllTypeListener listenerType = this.internalSub(listener, channel);
+        return getConnection().async().subscribe(channel).thenApply(unused -> (Subscription) listenerType).toCompletableFuture();
+    }
+
+    public <K extends Message> CompletableFuture<Subscription> subscribe(Class<K> type, Consumer<ReceivedMessage<K>> listener, String channel) {
+        TypedListener<K> listenerType = this.internalSub(type, listener, channel);
+        return getConnection().async().subscribe(channel).thenApply(unused -> (Subscription) listenerType).toCompletableFuture();
+    }
+
+    public CompletableFuture<Void> unsubscribe(String... channels) {
+        this.internalUnsub(channels);
+        return getConnection().async().unsubscribe(channels).toCompletableFuture();
+    }
+
+    public RedisFuture<Long> publish(String channel, Message message) {
+        return getConnection().async().publish(channel, message);
+    }
+
+}
