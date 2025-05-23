@@ -1,12 +1,12 @@
 package io.github.morapowered.channels.messaging.messengers;
 
 import io.github.morapowered.channels.messaging.Message;
-import io.github.morapowered.channels.messaging.ReceivedMessage;
+import io.github.morapowered.channels.messaging.messengers.message.ReceivedMessage;
 import io.github.morapowered.channels.messaging.codec.MessageCodec;
-import io.github.morapowered.channels.messaging.handler.MessagingHandler;
-import io.github.morapowered.channels.messaging.subscription.AllTypeListener;
-import io.github.morapowered.channels.messaging.subscription.Subscription;
-import io.github.morapowered.channels.messaging.subscription.TypedListener;
+import io.github.morapowered.channels.messaging.messengers.handler.MessagingHandler;
+import io.github.morapowered.channels.messaging.messengers.listener.AllTypeListener;
+import io.github.morapowered.channels.messaging.messengers.listener.Subscription;
+import io.github.morapowered.channels.messaging.messengers.listener.TypedListener;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisFuture;
 import io.lettuce.core.pubsub.StatefulRedisPubSubConnection;

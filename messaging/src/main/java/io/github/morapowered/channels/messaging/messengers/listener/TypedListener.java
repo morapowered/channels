@@ -1,7 +1,7 @@
-package io.github.morapowered.channels.messaging.subscription;
+package io.github.morapowered.channels.messaging.messengers.listener;
 
 import io.github.morapowered.channels.messaging.Message;
-import io.github.morapowered.channels.messaging.ReceivedMessage;
+import io.github.morapowered.channels.messaging.messengers.message.ReceivedMessage;
 
 import java.util.function.Consumer;
 

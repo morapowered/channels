@@ -1,4 +1,4 @@
-package io.github.morapowered.channels.messaging.handler;
+package io.github.morapowered.channels.messaging.messengers.handler;
 
 import io.github.morapowered.channels.messaging.Message;
 

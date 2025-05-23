@@ -1,4 +1,6 @@
-package io.github.morapowered.channels.messaging;
+package io.github.morapowered.channels.messaging.messengers.message;
+
+import io.github.morapowered.channels.messaging.Message;
 
 public class ReceivedMessage<T extends Message> {
 
