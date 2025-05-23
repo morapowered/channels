@@ -1,9 +1,11 @@
 [versions]
 lettuce = "6.6.0.RELEASE"
 gson = "2.13.1"
+annotations = "24.0.0"
 slf4jSimple = "2.0.17"
 
 [libraries]
 lettuce = { group = "io.lettuce", name = "lettuce-core", version.ref = "lettuce" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+annotations = { group = "org.jetbrains", name = "annotations", version.ref = "annotations" }
 slf4jSimple = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4jSimple" }
