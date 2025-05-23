@@ -2,7 +2,7 @@ package io.github.morapowered.channels.messaging.messengers.handler;
 
 import io.github.morapowered.channels.messaging.Message;
 
-public interface MessagingHandler {
+public interface MessengerHandler {
 
     default void onSubscribed(String channel, long count) {
     }

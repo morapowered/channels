@@ -4,8 +4,8 @@ package io.github.morapowered.channels.messaging.messengers;
 import io.github.morapowered.channels.messaging.Message;
 import io.github.morapowered.channels.messaging.messengers.message.ReceivedMessage;
 import io.github.morapowered.channels.messaging.codec.MessageCodec;
-import io.github.morapowered.channels.messaging.messengers.handler.LoggedMessagingHandler;
-import io.github.morapowered.channels.messaging.messengers.handler.MessagingHandler;
+import io.github.morapowered.channels.messaging.messengers.handler.LoggedMessengerHandler;
+import io.github.morapowered.channels.messaging.messengers.handler.MessengerHandler;
 import io.github.morapowered.channels.messaging.messengers.listener.AllTypeListener;
 import io.github.morapowered.channels.messaging.messengers.listener.ListenerType;
 import io.github.morapowered.channels.messaging.messengers.listener.Subscription;
@@ -23,7 +23,7 @@ import java.util.function.Consumer;
 public abstract class AbstractMessenger implements AutoCloseable {
 
     @NotNull
-    private final MessagingHandler handler;
+    private final MessengerHandler handler;
 
     @NotNull
     private final StatefulRedisPubSubConnection<String, Message> connection;
@@ -33,7 +33,7 @@ public abstract class AbstractMessenger implements AutoCloseable {
         this(client, new MessageCodec());
     }
 
-    public AbstractMessenger(RedisClient client, @Nullable MessagingHandler handler) {
+    public AbstractMessenger(RedisClient client, @Nullable MessengerHandler handler) {
         this(client, new MessageCodec(), handler);
     }
 
@@ -41,12 +41,12 @@ public abstract class AbstractMessenger implements AutoCloseable {
         this(client, codec, null);
     }
 
-    public AbstractMessenger(RedisClient client, MessageCodec codec, @Nullable MessagingHandler handler) {
+    public AbstractMessenger(RedisClient client, MessageCodec codec, @Nullable MessengerHandler handler) {
         this(client.connectPubSub(codec), handler);
     }
 
-    public AbstractMessenger(@NotNull StatefulRedisPubSubConnection<String, Message> connection, @Nullable MessagingHandler handler) {
-        this.handler = Optional.ofNullable(handler).orElse(new LoggedMessagingHandler(LoggerFactory.getLogger(getClass())));
+    public AbstractMessenger(@NotNull StatefulRedisPubSubConnection<String, Message> connection, @Nullable MessengerHandler handler) {
+        this.handler = Optional.ofNullable(handler).orElse(new LoggedMessengerHandler(LoggerFactory.getLogger(getClass())));
         this.connection = Objects.requireNonNull(connection, "connection cannot be null");
         this.connection.addListener(constructListener());
     }

@@ -3,7 +3,7 @@ package io.github.morapowered.channels.messaging.messengers;
 import io.github.morapowered.channels.messaging.Message;
 import io.github.morapowered.channels.messaging.messengers.message.ReceivedMessage;
 import io.github.morapowered.channels.messaging.codec.MessageCodec;
-import io.github.morapowered.channels.messaging.messengers.handler.MessagingHandler;
+import io.github.morapowered.channels.messaging.messengers.handler.MessengerHandler;
 import io.github.morapowered.channels.messaging.messengers.listener.AllTypeListener;
 import io.github.morapowered.channels.messaging.messengers.listener.Subscription;
 import io.github.morapowered.channels.messaging.messengers.listener.TypedListener;
@@ -20,7 +20,7 @@ public class SyncMessenger extends AbstractMessenger {
         super(client);
     }
 
-    public SyncMessenger(RedisClient client, @Nullable MessagingHandler handler) {
+    public SyncMessenger(RedisClient client, @Nullable MessengerHandler handler) {
         super(client, handler);
     }
 
@@ -28,11 +28,11 @@ public class SyncMessenger extends AbstractMessenger {
         super(client, codec);
     }
 
-    public SyncMessenger(RedisClient client, MessageCodec codec, @Nullable MessagingHandler handler) {
+    public SyncMessenger(RedisClient client, MessageCodec codec, @Nullable MessengerHandler handler) {
         super(client, codec, handler);
     }
 
-    public SyncMessenger(@NotNull StatefulRedisPubSubConnection<String, Message> connection, @Nullable MessagingHandler handler) {
+    public SyncMessenger(@NotNull StatefulRedisPubSubConnection<String, Message> connection, @Nullable MessengerHandler handler) {
         super(connection, handler);
     }
 

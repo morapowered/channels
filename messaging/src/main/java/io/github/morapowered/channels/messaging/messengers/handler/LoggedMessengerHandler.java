@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 
 import java.util.Objects;
 
-public class LoggedMessagingHandler implements MessagingHandler {
+public class LoggedMessengerHandler implements MessengerHandler {
 
     @NotNull
     private final Logger logger;
@@ -15,11 +15,11 @@ public class LoggedMessagingHandler implements MessagingHandler {
     private final boolean receivedUnexpectedChannelLogged;
     private final boolean processingMessageExceptionLogged;
 
-    public LoggedMessagingHandler(Logger logger) {
+    public LoggedMessengerHandler(Logger logger) {
         this(logger, true, true, true);
     }
 
-    public LoggedMessagingHandler(@NotNull Logger logger, boolean subscriberLogged, boolean receivedUnexpectedChannelLogged, boolean processingMessageExceptionLogged) {
+    public LoggedMessengerHandler(@NotNull Logger logger, boolean subscriberLogged, boolean receivedUnexpectedChannelLogged, boolean processingMessageExceptionLogged) {
         this.logger = Objects.requireNonNull(logger, "logger cannot be null");
         this.subscriberLogged = subscriberLogged;
         this.receivedUnexpectedChannelLogged = receivedUnexpectedChannelLogged;
