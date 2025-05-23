@@ -45,6 +45,10 @@ public abstract class AbstractMessenger implements AutoCloseable {
         this(client.connectPubSub(codec), handler);
     }
 
+    public AbstractMessenger(@NotNull StatefulRedisPubSubConnection<String, Message> connection) {
+        this(connection, null);
+    }
+
     public AbstractMessenger(@NotNull StatefulRedisPubSubConnection<String, Message> connection, @Nullable MessengerHandler handler) {
         this.handler = Optional.ofNullable(handler).orElse(new LoggedMessengerHandler(LoggerFactory.getLogger(getClass())));
         this.connection = Objects.requireNonNull(connection, "connection cannot be null");

@@ -32,6 +32,10 @@ public class SyncMessenger extends AbstractMessenger {
         super(client, codec, handler);
     }
 
+    public SyncMessenger(@NotNull StatefulRedisPubSubConnection<String, Message> connection) {
+        super(connection);
+    }
+
     public SyncMessenger(@NotNull StatefulRedisPubSubConnection<String, Message> connection, @Nullable MessengerHandler handler) {
         super(connection, handler);
     }

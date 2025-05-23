@@ -22,6 +22,11 @@ public class AsyncMessenger extends AbstractMessenger {
         super(connection, handler);
     }
 
+    public AsyncMessenger(@NotNull StatefulRedisPubSubConnection<String, Message> connection) {
+        super(connection);
+    }
+
+
     public AsyncMessenger(RedisClient client, MessageCodec codec, @Nullable MessengerHandler handler) {
         super(client, codec, handler);
     }
